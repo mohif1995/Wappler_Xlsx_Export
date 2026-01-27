@@ -1,30 +1,25 @@
-# Wappler extension for xlsx exporting 
+# Wappler Extension for Xlsx Exporting
 
-#[Requirement] 
+**Requirement**
 
 one node package need to be install
 
- `npm i --save https://cdn.sheetjs.com/xlsx-0.19.0/xlsx-0.19.0.tgz`
+ `npm i --save https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`
 
- [Base on SheetJS]https://sheetjs.com
+ **Base on [SheetJS](https://sheetjs.com)**
+
 
 # Documentation for SheetJS if you wish to improve it
 
 - [API and Usage Documentation](https://docs.sheetjs.com)
 
-
 # License
 
-MIT LICENSE 
-###SheetJS Community Edition -- https://sheetjs.com/
+ Sheetjs LICENSE bellow  [SheetJS Community Edition](https://git.sheetjs.com/sheetjs/sheetjs/src/branch/master/LICENSE)
 
-Copyright (C) 2012-present   SheetJS LLC
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+Extension Licensed under the [Apache License, Version 2.0 (the &#34;License&#34;)](http://www.apache.org/licenses/LICENSE-2.0);
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
