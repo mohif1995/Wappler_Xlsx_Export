@@ -1,0 +1,359 @@
+[
+  {
+    "usedModules": {
+      "node": {
+        "exceljs": "^4.4.0"
+      }
+    },
+    "type": "xlsxexport",
+    "module": "xlsxexport",
+    "action": "xlsxexport",
+    "groupTitle": "Xlsx Manager",
+    "groupIcon": "fas fa-lg fa-file comp-files",
+    "title": "XLSX Export @@var(name)@@",
+    "icon": "fad fa-lg fa-file-excel comp-files",
+    "dataPickObject": true,
+    "dataScheme": [
+      {
+        "name": "FilePath",
+        "type": "text"
+      },{
+        "name": "FileName",
+        "type": "text"
+      }{
+        "name": "Success",
+        "type": "boolean"
+      }
+    ],
+    "properties": [
+      {
+        "group": "Export xlsx File Properties",
+        "variables": [
+          {
+            "name": "name",
+            "optionName": "name",
+            "title": "Name",
+            "type": "text",
+            "required": true,
+            "defaultValue": "",
+            "help": "Unique identifier for this export action"
+          },
+          {
+            "name": "filename",
+            "optionName": "filename",
+            "title": "File Name",
+            "type": "text",
+            "defaultValue": "",
+            "serverDataBindings": true,
+            "help": "Name of the Excel file to create (max 31 characters, special characters will be removed)",
+            "required": true
+          },
+          
+          {
+            "name": "sheetname",
+            "optionName": "sheetname",
+            "title": "WorkSheet Name",
+            "type": "text",
+            "defaultValue": "",
+            "serverDataBindings": true,
+            "help": "Name of the worksheet tab (max 31 chars, no special characters, numbers, or spaces allowed)",
+            "required": true
+          },
+          {
+            "name": "path",
+            "optionName": "path",
+            "title": "Path",
+            "type": "folder",
+            "defaultValue": "",
+            "serverDataBindings": true,
+            "help": "Directory path where the Excel file will be saved (server-side path)",
+            "required": true
+          },
+          {
+            "name": "data",
+            "optionName": "data",
+            "title": "Export Data",
+            "type": "text",
+            "serverDataBindings": true,
+            "defaultValue": "",
+            "help": "Array of objects or 2D array containing data to export (e.g., query results or repeater data)",
+            "required": true
+          },
+          {
+            "name": "output",
+            "optionName": "output",
+            "title": "Output",
+            "type": "boolean",
+            "defaultValue": false,
+            "help": "Show file path in the output (FilePath property contains the generated file path)"
+          }
+        ]
+      },
+      {
+        "group": "Cell Styling - Format & Alignment",
+        "variables": [
+          {
+            "name": "numberFormat",
+            "optionName": "numberFormat",
+            "title": "Number Format",
+            "type": "text",
+            "defaultValue": "",
+            "serverDataBindings": true,
+            "help": "Excel format code: '@'=text, '0'=integer, '0.00'=decimal, '$#,##0.00'=currency, '0%'=percent, 'mm/dd/yyyy'=date, 'hh:mm:ss'=time"
+          },
+          {
+            "name": "alignment",
+            "optionName": "alignment",
+            "title": "Alignment",
+            "type": "droplist",
+            "values": [
+              {"title": "Left", "value": "left"},
+              {"title": "Center", "value": "center"},
+              {"title": "Right", "value": "right"},
+              {"title": "Distributed", "value": "distributed"}
+            ],
+            "defaultValue": "left",
+            "help": "Horizontal alignment of cell content"
+          },
+          {
+            "name": "verticalAlignment",
+            "optionName": "verticalAlignment",
+            "title": "Vertical Alignment",
+            "type": "droplist",
+            "values": [
+              {"title": "Top", "value": "top"},
+              {"title": "Middle", "value": "middle"},
+              {"title": "Bottom", "value": "bottom"},
+              {"title": "Distributed", "value": "distributed"}
+            ],
+            "defaultValue": "top",
+            "help": "Vertical alignment of cell content"
+          },
+          {
+            "name": "wrapText",
+            "optionName": "wrapText",
+            "title": "Wrap Text",
+            "type": "boolean",
+            "defaultValue": false,
+            "help": "Enable text wrapping so long content displays on multiple lines within the cell"
+          }
+        ]
+      },
+      {
+        "group": "Font Styling",
+        "variables": [
+          {
+            "name": "fontSize",
+            "optionName": "fontSize",
+            "title": "Font Size",
+            "type": "number",
+            "defaultValue": 11,
+            "help": "Font size in points (typically 8-72). Header uses this value + 1"
+          },
+          {
+            "name": "fontName",
+            "optionName": "fontName",
+            "title": "Font Name",
+            "type": "text",
+            "defaultValue": "Arial",
+            "help": "Font family: Arial, Calibri, Times New Roman, Courier, Verdana, etc."
+          },
+          {
+            "name": "fontColor",
+            "optionName": "fontColor",
+            "title": "Font Color (HEX)",
+            "type": "text",
+            "defaultValue": "FF000000",
+            "serverDataBindings": true,
+            "help": "Text color in ARGB hex format (e.g., FF000000=black, FFFF0000=red, FF00FF00=green, FF0000FF=blue)"
+          },
+          {
+            "name": "fontBold",
+            "optionName": "fontBold",
+            "title": "Bold",
+            "type": "boolean",
+            "defaultValue": false,
+            "help": "Apply bold formatting to data cell text (headers are always bold)"
+          },
+          {
+            "name": "fontItalic",
+            "optionName": "fontItalic",
+            "title": "Italic",
+            "type": "boolean",
+            "defaultValue": false,
+            "help": "Apply italic formatting to cell text"
+          },
+          {
+            "name": "fontUnderline",
+            "optionName": "fontUnderline",
+            "title": "Underline",
+            "type": "droplist",
+            "values": [
+              {"title": "None", "value": "none"},
+              {"title": "Single", "value": "single"},
+              {"title": "Double", "value": "double"},
+              {"title": "Single Accounting", "value": "singleAccounting"},
+              {"title": "Double Accounting", "value": "doubleAccounting"}
+            ],
+            "defaultValue": "none",
+            "help": "Apply underline style to cell text"
+          }
+        ]
+      },
+      {
+        "group": "Fill & Border",
+        "variables": [
+          {
+            "name": "fillType",
+            "optionName": "fillType",
+            "title": "Fill Type",
+            "type": "droplist",
+            "values": [
+              {"title": "None", "value": "none"},
+              {"title": "Pattern (Solid Color)", "value": "pattern"},
+              {"title": "Gradient (Two Color Blend)", "value": "gradient"}
+            ],
+            "defaultValue": "none",
+            "help": "Select the type of fill: None (no fill), Pattern (solid color), or Gradient (blend of two colors)"
+          },
+          {
+            "name": "backgroundColor",
+            "optionName": "backgroundColor",
+            "title": "Background Color (HEX)",
+            "type": "text",
+            "defaultValue": "FFFFFFFF",
+            "serverDataBindings": true,
+            "help": "Hex color code in ARGB format (e.g., FFFFFF for white, FF0000 for red). For gradient, this is the end color."
+          },
+          {
+            "name": "gradientStartColor",
+            "optionName": "gradientStartColor",
+            "title": "Gradient Start Color (HEX)",
+            "type": "text",
+            "defaultValue": "FFFFFFFF",
+            "serverDataBindings": true,
+            "help": "Starting color for gradient fill in ARGB format. Only used when Fill Type is 'Gradient'. Example: FFFFFFFF (white)"
+          },
+          {
+            "name": "gradientAngle",
+            "optionName": "gradientAngle",
+            "title": "Gradient Angle (0-359)",
+            "type": "number",
+            "defaultValue": 0,
+            "serverDataBindings": true,
+            "help": "Direction of gradient in degrees: 0=vertical down, 90=horizontal right, 180=vertical up, 270=horizontal left. Only used when Fill Type is 'Gradient'."
+          },
+          {
+            "name": "borderStyle",
+            "optionName": "borderStyle",
+            "title": "Border Style",
+            "type": "droplist",
+            "values": [
+              {"title": "None", "value": "none"},
+              {"title": "Thin", "value": "thin"},
+              {"title": "Medium", "value": "medium"},
+              {"title": "Thick", "value": "thick"},
+              {"title": "Dotted", "value": "dotted"},
+              {"title": "Dashed", "value": "dashed"},
+              {"title": "Double", "value": "double"},
+              {"title": "Hair", "value": "hair"},
+              {"title": "Medium Dashed", "value": "mediumDashed"},
+              {"title": "Dash Dot", "value": "dashDot"}
+            ],
+            "defaultValue": "none",
+            "help": "Choose the border line style for cells"
+          },
+          {
+            "name": "borderColor",
+            "optionName": "borderColor",
+            "title": "Border Color (HEX)",
+            "type": "text",
+            "defaultValue": "FF000000",
+            "serverDataBindings": true,
+            "help": "Border line color in ARGB hex format (e.g., FF000000 for black, FFFF0000 for red)"
+          }
+        ]
+      },
+      {
+        "group": "Sheet Protection & Security",
+        "variables": [
+          {
+            "name": "protectSheet",
+            "optionName": "protectSheet",
+            "title": "Protect Sheet",
+            "type": "boolean",
+            "defaultValue": false,
+            "help": "Enable sheet protection to prevent unauthorized editing. Requires sheetPassword if enabled. Users can unlock with password."
+          },
+          {
+            "name": "sheetPassword",
+            "optionName": "sheetPassword",
+            "title": "Sheet Password",
+            "type": "text",
+            "defaultValue": "",
+            "serverDataBindings": true,
+            "help": "Password required to unprotect the sheet (only active if protectSheet is enabled). Leave empty for no password."
+          },
+          {
+            "name": "lockCells",
+            "optionName": "lockCells",
+            "title": "Lock Cells",
+            "type": "boolean",
+            "defaultValue": false,
+            "help": "When enabled with protectSheet, prevents editing of all cells and hides formulas. When disabled, cells remain editable even when sheet is protected."
+          }
+        ]
+      },
+      {
+        "group": "Advanced Features",
+        "variables": [
+          {
+            "name": "freezePane",
+            "optionName": "freezePane",
+            "title": "Freeze Pane (Row:Col)",
+            "type": "text",
+            "defaultValue": "",
+            "serverDataBindings": true,
+            "help": "Freeze rows and columns for scrolling. Format: ROW:COL (e.g., '1:0' freezes first row, '0:1' freezes first column, '1:1' freezes both)"
+          },
+          {
+            "name": "autoFilter",
+            "optionName": "autoFilter",
+            "title": "Auto Filter Range",
+            "type": "text",
+            "defaultValue": "",
+            "serverDataBindings": true,
+            "help": "Apply filter dropdowns to header row. Format: A1:Z100 (use column letters and row numbers)"
+          },
+          {
+            "name": "conditionalFormatting",
+            "optionName": "conditionalFormatting",
+            "title": "Conditional Formatting (JSON)",
+            "type": "textarea",
+            "serverDataBindings": true,
+            "defaultValue": "",
+            "help": "JSON array of conditional formatting rules. Example: [{\"range\":\"A2:A100\",\"type\":\"expression\",\"formula\":\"A2>100\",\"fill\":{\"fgColor\":{\"argb\":\"FFFFFF00\"}}}]"
+          },
+          {
+            "name": "dataValidation",
+            "optionName": "dataValidation",
+            "title": "Data Validation (JSON)",
+            "type": "textarea",
+            "serverDataBindings": true,
+            "defaultValue": "",
+            "help": "JSON array of validation rules for dropdowns/ranges. Example: [{\"range\":\"B2:B100\",\"type\":\"list\",\"formula1\":\"Option1,Option2,Option3\",\"errorTitle\":\"Invalid\",\"error\":\"Select from list\"}]"
+          },
+          {
+            "name": "printOptions",
+            "optionName": "printOptions",
+            "title": "Print Options (JSON)",
+            "type": "textarea",
+            "serverDataBindings": true,
+            "defaultValue": "",
+            "help": "JSON object for print settings. Example: {\"orientation\":\"landscape\",\"paperSize\":1,\"fitToPage\":true,\"fitToHeight\":1,\"fitToWidth\":2}"
+          }
+        ]
+      }
+    ]
+  }
+]
