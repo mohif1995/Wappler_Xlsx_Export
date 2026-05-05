@@ -1,13 +1,13 @@
-# XLSX Manager Extension
+# XLSX Export  Extension
 
-A comprehensive Wappler extension for Excel file import and export with advanced formatting, protection, and styling capabilities.
+A comprehensive Wappler extension for Excel file export with advanced formatting, protection, and styling capabilities.
 
 ## Overview
 
 This extension provides two main modules for working with Excel files in Wappler:
 
 - **XLSX Export** - Create formatted Excel files with advanced styling, protection, and configuration options
-- **XLSX Import** - Read and parse Excel files with flexible data handling
+
 
 ---
 
@@ -75,14 +75,7 @@ This extension provides two main modules for working with Excel files in Wappler
   - Fit-to-page scaling
   - Print grid lines and row/column headers
 
-### 📥 XLSX Import
 
-#### Core Functionality
-- ✅ Import Excel files and parse data
-- ✅ Support for multiple sheets
-- ✅ Extract data as arrays or objects
-- ✅ Handle headers and data rows
-- ✅ CSV file support
 
 ---
 
@@ -184,17 +177,6 @@ These dependencies are declared in the module configuration (.hjson files).
 }
 ```
 
-### Basic Import Example
-
-```javascript
-{
-  path: "/uploads/data.xlsx",
-  header: true,
-  sheetIndex: 0
-}
-```
-
----
 
 ## Property Reference
 
@@ -254,19 +236,7 @@ These dependencies are declared in the module configuration (.hjson files).
 | `dataValidation` | JSON | Data validation rules |
 | `printOptions` | JSON | Print configuration settings |
 
-### XLSX Import Properties
 
-| Property | Type | Required | Description |
-|----------|------|----------|-------------|
-| `name` | string | ✓ | Unique identifier for this import action |
-| `path` | string | ✓ | File path to import |
-| `header` | boolean | - | Use first row as column headers |
-| `sheetIndex` | number | - | Sheet index to import (0-based) |
-| `sheetName` | string | - | Sheet name to import by name |
-| `import_empty_cells` | boolean | - | Include empty cells in data |
-| `skip_empty_rows` | boolean | - | Skip rows that are entirely empty |
-
----
 
 ## Number Format Examples
 
@@ -527,14 +497,15 @@ For issues, feature requests, or bug reports:
 ---
 
 ## License
-
-This extension is part of the TocEmploymentMS Wappler project.
+Exceljs is MIT [License](https://github.com/exceljs/exceljs?tab=MIT-1-ov-file)
+This extension is part of Mohif1995's extensions and is Follow Apache Licence 
 
 ---
 
 ## Version History
-
+-1.03 Sheetjs Node packege last version with it .
 ### Current Version
+- Change Sheetjs with ExcelJs 
 - Comprehensive ExcelJS feature support
 - Full formatting and styling capabilities
 - Sheet protection and data validation
